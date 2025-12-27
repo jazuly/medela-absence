@@ -25,6 +25,10 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+## Env Setup
+- Rename `.env.example` to `.env`
+- Update `DATABASE_URL` to your Postgres URI Connection
+
 ## Project setup
 
 ```bash
