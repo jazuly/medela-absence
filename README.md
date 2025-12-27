@@ -29,6 +29,12 @@
 
 ```bash
 $ pnpm install
+
+# migrate
+$ npx prisma migrate deploy
+
+# generate prisma
+$ npx prisma generate 
 ```
 
 ## Compile and run the project
