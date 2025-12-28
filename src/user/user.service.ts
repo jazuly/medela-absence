@@ -20,7 +20,13 @@ export class UserService {
 
     return this.prisma.user.findUnique({
       where: { id },
-      include: {
+      select: {
+        id: true,
+        nama: true,
+        email: true,
+        foto: true,
+        posisi: true,
+        noHp: true,
         absenses: {
           where: {
             login: {
@@ -34,7 +40,16 @@ export class UserService {
   }
 
   async find() {
-    return this.prisma.user.findMany();
+    return this.prisma.user.findMany({
+      select: {
+        id: true,
+        nama: true,
+        email: true,
+        foto: true,
+        posisi: true,
+        noHp: true,
+      },
+    });
   }
 
   async create(data: CreateUserDto, foto: Express.Multer.File) {

@@ -18,7 +18,7 @@ export class AuthService {
 
     if (!user) throw new UnauthorizedException();
 
-    if (!compareSync(loginDto.password, user.password as string)) {
+    if (!compareSync(loginDto.password, user.password)) {
       throw new UnauthorizedException();
     }
 
