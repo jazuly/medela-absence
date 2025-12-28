@@ -3,6 +3,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { startOfDay, endOfDay } from 'date-fns';
+import { hashSync } from 'bcrypt';
 import { Uploader } from './uploader';
 
 @Injectable()
@@ -37,6 +38,8 @@ export class UserService {
   }
 
   async create(data: CreateUserDto, foto: Express.Multer.File) {
+    const saltOrRounds = 10;
+    const hashedPassword = hashSync(data.password, saltOrRounds);
     const fileName = foto ? await this.uploader.s3(foto) : null;
 
     return this.prisma.user.create({
@@ -46,6 +49,7 @@ export class UserService {
         foto: fileName,
         posisi: data.posisi,
         noHp: data.noHp,
+        password: hashedPassword,
       },
     });
   }

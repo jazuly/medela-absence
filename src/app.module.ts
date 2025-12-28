@@ -9,6 +9,9 @@ import { PrismaService } from './prisma/prisma.service';
 import { PrismaModule } from './prisma/prisma.module';
 import { ConfigModule } from '@nestjs/config';
 import { Uploader } from './user/uploader';
+import { AuthModule } from './auth/auth.module';
+import { AuthGuard } from './auth/auth.guard';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -16,8 +19,18 @@ import { Uploader } from './user/uploader';
     UserModule,
     AbsenceModule,
     PrismaModule,
+    AuthModule,
   ],
   controllers: [AppController, UserController],
-  providers: [AppService, UserService, PrismaService, Uploader],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
+    AppService,
+    UserService,
+    PrismaService,
+    Uploader,
+  ],
 })
 export class AppModule {}
