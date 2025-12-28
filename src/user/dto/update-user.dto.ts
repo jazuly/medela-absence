@@ -1,10 +1,6 @@
-import { IsOptional, IsString } from 'class-validator';
+import { IsString } from 'class-validator';
 
 export class UpdateUserDto {
-  @IsOptional()
-  @IsString()
-  foto?: string;
-
   @IsString()
   noHp: string;
 }

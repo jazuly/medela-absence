@@ -8,6 +8,7 @@ import { AbsenceModule } from './absence/absence.module';
 import { PrismaService } from './prisma/prisma.service';
 import { PrismaModule } from './prisma/prisma.module';
 import { ConfigModule } from '@nestjs/config';
+import { Uploader } from './user/uploader';
 
 @Module({
   imports: [
@@ -17,6 +18,6 @@ import { ConfigModule } from '@nestjs/config';
     PrismaModule,
   ],
   controllers: [AppController, UserController],
-  providers: [AppService, UserService, PrismaService],
+  providers: [AppService, UserService, PrismaService, Uploader],
 })
 export class AppModule {}

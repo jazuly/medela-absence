@@ -1,18 +1,22 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { startOfDay, endOfDay } from 'date-fns';
+import { startOfDay, endOfDay, startOfMonth } from 'date-fns';
 
 @Injectable()
 export class AbsenceService {
   constructor(private prisma: PrismaService) {}
 
   findByUserId(userId: string, startDate?: string, endDate?: string) {
+    const targetDate = new Date();
+
     return this.prisma.absense.findMany({
       where: {
         userId,
         login: {
-          gte: startDate ? new Date(startDate) : undefined,
-          lte: endDate ? new Date(endDate) : undefined,
+          gte: startDate
+            ? startOfDay(new Date(startDate))
+            : startOfMonth(targetDate),
+          lte: endDate ? endOfDay(new Date(endDate)) : targetDate,
         },
       },
       orderBy: { login: 'asc' },
