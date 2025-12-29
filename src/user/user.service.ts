@@ -76,6 +76,15 @@ export class UserService {
       throw new BadRequestException(`User not found`);
     }
 
+    if (data.password && data.password != '') {
+      const saltOrRounds = 10;
+      const hashedPassword = hashSync(data.password, saltOrRounds);
+
+      data.password = hashedPassword;
+    } else {
+      delete data.password;
+    }
+
     const fileName = foto ? await this.uploader.s3(foto) : user.foto;
 
     return this.prisma.user.update({

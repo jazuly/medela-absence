@@ -7,6 +7,7 @@ import {
   Put,
   UseInterceptors,
   UploadedFile,
+  Request,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -29,6 +30,11 @@ export class UserController {
   @Get()
   find() {
     return this.usersService.find();
+  }
+
+  @Get('profile')
+  profile(@Request() req) {
+    return this.usersService.findOne(req.user.id as string);
   }
 
   @Get(':id')
