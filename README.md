@@ -39,6 +39,9 @@ $ npx prisma migrate deploy
 
 # generate prisma
 $ npx prisma generate 
+
+# seed default user for testing
+$ npx prisma db seed 
 ```
 
 ## Compile and run the project
@@ -65,6 +68,14 @@ $ pnpm run test:e2e
 
 # test coverage
 $ pnpm run test:cov
+```
+
+## Default User for Testing
+```json
+{
+  "email": "admin@yopmail.com",
+  "password": "password"
+}
 ```
 
 ## Deployment

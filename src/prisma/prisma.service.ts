@@ -8,13 +8,11 @@ export class PrismaService
   implements OnModuleInit, OnModuleDestroy
 {
   constructor() {
-    // Create adapter with your DATABASE_URL
     const adapter = new PrismaPg({
       connectionString: process.env.DATABASE_URL!,
       schema: 'absence',
     });
 
-    // Pass adapter to PrismaClient
     super({ adapter });
   }
 
